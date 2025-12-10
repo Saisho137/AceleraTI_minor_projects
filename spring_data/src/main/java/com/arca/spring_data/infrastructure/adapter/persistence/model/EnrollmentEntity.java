@@ -1,7 +1,9 @@
 package com.arca.spring_data.infrastructure.adapter.persistence.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "enrollments")
 public class EnrollmentEntity {
