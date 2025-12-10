@@ -1,0 +1,13 @@
+La aplicación para una sistema de gestión de un colegio.
+
+- Los usuarios tienen nombre e email y pueden ser de tipo Estudiante o Docente.
+- Tanto estudiantes como docentes tienen cursos. Los cursos tienen un nombre y una descripción.
+- Los estudiantes matriculados a un curso tienen una nota (desde O.0 a 5.0).
+- Además, los cursos tienen tareas publicadas por los docentes.
+- Una tarea tiene: título, descripción y fecha de publicación.
+
+Crear la aplicación que permita:
+- Registrar notas de un estudiante.
+- Consultar los anuncios de un curso.
+- Listar los cursos de un docente.
+- Listar los estudiantes de un curso con sus respectivas notas.
