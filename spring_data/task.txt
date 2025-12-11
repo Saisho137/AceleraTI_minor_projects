@@ -11,3 +11,8 @@ Crear la aplicación que permita:
 - Consultar los anuncios de un curso.
 - Listar los cursos de un docente.
 - Listar los estudiantes de un curso con sus respectivas notas.
+
+Pendientes:
+- Handlers intermedios entre controllers y usecases
+- Paginación
+- Refinar estructura de carpetas

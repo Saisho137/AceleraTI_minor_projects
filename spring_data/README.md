@@ -86,24 +86,6 @@ El proyecto implementa **Arquitectura Hexagonal (Ports & Adapters)** con los sig
 - Tareas o anuncios publicados en un curso
 - Ordenadas por fecha de publicación
 
-### Índices de Base de Datos
-
-```sql
--- Users
-CREATE UNIQUE INDEX idx_user_email ON users(email);
-
--- Courses
-CREATE INDEX idx_course_teacher ON courses(teacher_id);
-
--- Enrollments
-CREATE INDEX idx_enrollment_student ON enrollments(student_id);
-CREATE INDEX idx_enrollment_course ON enrollments(course_id);
-
--- Tasks
-CREATE INDEX idx_task_course ON tasks(course_id);
-CREATE INDEX idx_task_published ON tasks(published_at);
-```
-
 ## 🚀 Tecnologías
 
 ### Backend
@@ -180,7 +162,7 @@ Todos los endpoints retornan errores en el siguiente formato:
 
 ## 🗂️ Estructura del Proyecto
 
-```
+```text
 src/main/java/com/arca/spring_data/
 ├── domain/                           # 🟢 CAPA DE DOMINIO (Core Business)
 │   ├── constants/                   # Constantes de mensajes y valores
@@ -268,7 +250,7 @@ src/main/resources/
 
 ### Flujo de Datos
 
-```
+```text
 Cliente HTTP
     │
     ▼
@@ -295,77 +277,3 @@ Cliente HTTP
     ▼
 PostgreSQL
 ```
-
-## 🔒 Mejores Prácticas Implementadas
-
-### Arquitectura y Diseño
-- ✅ **Arquitectura Hexagonal** - Separación clara entre dominio e infraestructura
-- ✅ **Domain-Driven Design** - Lógica de negocio en el dominio
-- ✅ **Dependency Inversion** - El dominio no depende de frameworks
-- ✅ **Use Cases** - Lógica de aplicación encapsulada
-- ✅ **Ports & Adapters** - Interfaces para abstraer dependencias externas
-
-### API y Web
-- ✅ **Versionamiento de API** - `/api/v1` para control de versiones
-- ✅ **DTOs** - Separación entre modelos de dominio y API
-- ✅ **Validaciones Jakarta** - Validación de requests con anotaciones
-- ✅ **CORS configurado** - Permite peticiones desde frontend
-- ✅ **Manejo global de excepciones** - Respuestas de error consistentes
-- ✅ **HTTP Status correctos** - 200, 201, 400, 404, 500
-
-### Base de Datos y Persistencia
-- ✅ **JPA con Hibernate** - ORM para mapeo objeto-relacional
-- ✅ **Lazy Loading** - Carga perezosa en relaciones (@FetchType.LAZY)
-- ✅ **Índices optimizados** - Índices en columnas de búsqueda frecuente
-- ✅ **Clave compuesta** - EnrollmentId con @EmbeddedId
-- ✅ **Cascade y Orphan Removal** - Gestión automática de dependencias
-- ✅ **Connection Pooling** - HikariCP para gestión de conexiones
-- ✅ **Transacciones** - @Transactional con readOnly optimizado
-
-### Código Limpio
-- ✅ **Lombok** - Reducción de boilerplate (@Data, @AllArgsConstructor)
-- ✅ **Streams API** - `.toList()` en lugar de `Collectors.toList()`
-- ✅ **Constantes centralizadas** - ErrorMessages para mensajes
-- ✅ **Sin comentarios innecesarios** - Código autodocumentado
-- ✅ **Naming conventions** - Nombres descriptivos y consistentes
-- ✅ **@Serial annotation** - Para serialVersionUID (Java 14+)
-
-### Configuración
-- ✅ **Perfiles de Spring** - dev, prod con configuraciones específicas
-- ✅ **Variables de entorno** - Configuración externalizada
-- ✅ **application.yaml** - Configuración centralizada
-- ✅ **Beans de configuración** - UseCaseConfig, WebConfig
-
-### Calidad de Código
-- ✅ **SonarQube compliant** - Sin code smells críticos
-- ✅ **Equals/HashCode correctos** - @EqualsAndHashCode en entidades JPA
-- ✅ **ToString sin ciclos** - @ToString(exclude) para relaciones
-- ✅ **Serializable con @Serial** - Para excepciones y claves compuestas
-
-## 📚 Recursos Adicionales
-
-### Documentación
-- [Spring Boot Documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/)
-- [Spring Data JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
-- [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/)
-
-### Herramientas Recomendadas
-- **IntelliJ IDEA** - IDE recomendado
-- **Postman** - Para probar endpoints
-- **DBeaver** - Cliente de PostgreSQL
-- **SonarLint** - Análisis de código en tiempo real
-
-## 👥 Contribuciones
-
-Este proyecto sigue las mejores prácticas de:
-- Clean Code (Robert C. Martin)
-- Domain-Driven Design (Eric Evans)
-- Hexagonal Architecture (Alistair Cockburn)
-
-## 📝 Licencia
-
-Este proyecto es parte de **AceleraTI** - Programa de formación en tecnologías de la información.
-
----
-
-**Desarrollado con** ❤️ **usando Spring Boot y Arquitectura Hexagonal**
