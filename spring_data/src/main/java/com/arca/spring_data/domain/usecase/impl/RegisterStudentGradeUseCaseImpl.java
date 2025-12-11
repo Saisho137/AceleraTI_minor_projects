@@ -39,15 +39,15 @@ public class RegisterStudentGradeUseCaseImpl implements RegisterStudentGradeUseC
             throw new BusinessRuleException(String.format(ErrorMessages.USER_NOT_STUDENT, studentId));
         }
 
-        Course course = courseRepository.findById(courseId)
+        courseRepository.findById(courseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Course", courseId));
 
         Enrollment enrollment = enrollmentRepository
                 .findByStudentIdAndCourseId(studentId, courseId)
-                .orElse(new Enrollment());
+                .orElseThrow(() -> new BusinessRuleException(
+                    String.format("Student with id %d is not enrolled in course with id %d", studentId, courseId)
+                ));
 
-        enrollment.setStudent(student);
-        enrollment.setCourse(course);
         enrollment.setGrade(grade);
 
         return enrollmentRepository.save(enrollment);

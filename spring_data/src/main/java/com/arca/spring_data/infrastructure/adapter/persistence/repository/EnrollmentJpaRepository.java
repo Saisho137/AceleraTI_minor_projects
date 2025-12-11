@@ -12,17 +12,11 @@ import java.util.List;
 @Repository
 public interface EnrollmentJpaRepository extends JpaRepository<EnrollmentEntity, EnrollmentId> {
 
-    @Query("SELECT e FROM EnrollmentEntity e WHERE e.student.id = :studentId")
-    List<EnrollmentEntity> findByStudentId(@Param("studentId") Long studentId);
+    List<EnrollmentEntity> findByStudentId(Long studentId);
 
-    @Query("SELECT e FROM EnrollmentEntity e WHERE e.course.id = :courseId")
-    List<EnrollmentEntity> findByCourseId(@Param("courseId") Long courseId);
+    List<EnrollmentEntity> findByCourseId(Long courseId);
 
-    @Query("SELECT e FROM EnrollmentEntity e WHERE e.student.id = :studentId AND e.grade >= :minGrade")
-    List<EnrollmentEntity> findByStudentIdAndGradeGreaterThanEqual(
-        @Param("studentId") Long studentId,
-        @Param("minGrade") Double minGrade
-    );
+    List<EnrollmentEntity> findByStudentIdAndGradeGreaterThanEqual(Long studentId, Double minGrade);
 
     @Query("SELECT AVG(e.grade) FROM EnrollmentEntity e WHERE e.student.id = :studentId")
     Double calculateAverageGradeByStudentId(@Param("studentId") Long studentId);
