@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/enrollments")
+@RequestMapping("/api/v1/enrollments")
 public class EnrollmentController {
 
     private final RegisterStudentGradeUseCase registerStudentGradeUseCase;

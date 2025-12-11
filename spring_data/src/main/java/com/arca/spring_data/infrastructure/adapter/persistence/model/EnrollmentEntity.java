@@ -5,18 +5,23 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "enrollments")
+@Table(name = "enrollments", indexes = {
+    @Index(name = "idx_enrollment_student", columnList = "student_id"),
+    @Index(name = "idx_enrollment_course", columnList = "course_id")
+})
 public class EnrollmentEntity {
     @EmbeddedId
-    EnrollmentId id;
+    private EnrollmentId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("studentId")
-    UserEntity student;
+    @JoinColumn(name = "student_id")
+    private UserEntity student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("courseId")
-    CourseEntity course;
+    @JoinColumn(name = "course_id")
+    private CourseEntity course;
 
-    Double grade;
+    private Double grade;
 }

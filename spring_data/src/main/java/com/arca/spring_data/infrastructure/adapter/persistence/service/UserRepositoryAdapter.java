@@ -5,10 +5,12 @@ import com.arca.spring_data.domain.port.UserRepository;
 import com.arca.spring_data.infrastructure.adapter.persistence.mapper.UserMapper;
 import com.arca.spring_data.infrastructure.adapter.persistence.repository.UserJpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 public class UserRepositoryAdapter implements UserRepository {
 
     private final UserJpaRepository jpaRepository;
@@ -20,6 +22,7 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    @Transactional
     public User save(User user) {
         return mapper.toDomain(jpaRepository.save(mapper.toEntity(user)));
     }
@@ -40,6 +43,7 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }

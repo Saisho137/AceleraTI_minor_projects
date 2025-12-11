@@ -1,5 +1,6 @@
 package com.arca.spring_data.domain.usecase.impl;
 
+import com.arca.spring_data.domain.constants.ErrorMessages;
 import com.arca.spring_data.domain.enums.Role;
 import com.arca.spring_data.domain.exception.BusinessRuleException;
 import com.arca.spring_data.domain.exception.InvalidGradeException;
@@ -35,7 +36,7 @@ public class RegisterStudentGradeUseCaseImpl implements RegisterStudentGradeUseC
                 .orElseThrow(() -> new ResourceNotFoundException("Student", studentId));
 
         if (student.getRole() != Role.STUDENT) {
-            throw new BusinessRuleException("User with id " + studentId + " is not a student");
+            throw new BusinessRuleException(String.format(ErrorMessages.USER_NOT_STUDENT, studentId));
         }
 
         Course course = courseRepository.findById(courseId)
@@ -54,10 +55,10 @@ public class RegisterStudentGradeUseCaseImpl implements RegisterStudentGradeUseC
 
     private void validateGrade(Double grade) {
         if (grade == null) {
-            throw new InvalidGradeException("Grade cannot be null");
+            throw new InvalidGradeException(ErrorMessages.GRADE_CANNOT_BE_NULL);
         }
         if (grade < 0.0 || grade > 5.0) {
-            throw new InvalidGradeException(grade);
+            throw new InvalidGradeException(String.format(ErrorMessages.INVALID_GRADE_RANGE, grade));
         }
     }
 }

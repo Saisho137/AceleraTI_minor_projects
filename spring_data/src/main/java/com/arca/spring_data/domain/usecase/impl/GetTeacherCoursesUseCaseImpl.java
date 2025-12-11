@@ -1,5 +1,6 @@
 package com.arca.spring_data.domain.usecase.impl;
 
+import com.arca.spring_data.domain.constants.ErrorMessages;
 import com.arca.spring_data.domain.enums.Role;
 import com.arca.spring_data.domain.exception.BusinessRuleException;
 import com.arca.spring_data.domain.exception.ResourceNotFoundException;
@@ -31,7 +32,7 @@ public class GetTeacherCoursesUseCaseImpl implements GetTeacherCoursesUseCase {
 
         // Validar que el usuario es un docente
         if (teacher.getRole() != Role.TEACHER) {
-            throw new BusinessRuleException("User with id " + teacherId + " is not a teacher");
+            throw new BusinessRuleException(String.format(ErrorMessages.USER_NOT_TEACHER, teacherId));
         }
 
         // Obtener cursos del docente

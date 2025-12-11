@@ -6,15 +6,21 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "users", indexes = {
+    @Index(name = "idx_user_email", columnList = "email", unique = true)
+})
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String name;
-    String email;
+    @Column(nullable = false, length = 100)
+    private String name;
+
+    @Column(nullable = false, unique = true, length = 150)
+    private String email;
 
     @Enumerated(EnumType.STRING)
-    Role role;
+    @Column(nullable = false, length = 20)
+    private Role role;
 }

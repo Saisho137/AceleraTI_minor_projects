@@ -7,21 +7,27 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "courses")
+@Table(name = "courses", indexes = {
+    @Index(name = "idx_course_teacher", columnList = "teacher_id")
+})
 public class CourseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String name;
-    String description;
+    @Column(nullable = false, length = 200)
+    private String name;
 
-    @ManyToOne
-    UserEntity teacher;
+    @Column(length = 1000)
+    private String description;
 
-    @OneToMany(mappedBy = "course")
-    Set<EnrollmentEntity> enrollments;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private UserEntity teacher;
 
-    @OneToMany(mappedBy = "course")
-    Set<TaskEntity> tasks;
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<EnrollmentEntity> enrollments;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<TaskEntity> tasks;
 }

@@ -5,12 +5,14 @@ import com.arca.spring_data.domain.port.TaskRepository;
 import com.arca.spring_data.infrastructure.adapter.persistence.mapper.TaskMapper;
 import com.arca.spring_data.infrastructure.adapter.persistence.repository.TaskJpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class TaskRepositoryAdapter implements TaskRepository {
 
     private final TaskJpaRepository jpaRepository;
@@ -22,6 +24,7 @@ public class TaskRepositoryAdapter implements TaskRepository {
     }
 
     @Override
+    @Transactional
     public Task save(Task task) {
         return mapper.toDomain(jpaRepository.save(mapper.toEntity(task)));
     }
@@ -46,6 +49,7 @@ public class TaskRepositoryAdapter implements TaskRepository {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }

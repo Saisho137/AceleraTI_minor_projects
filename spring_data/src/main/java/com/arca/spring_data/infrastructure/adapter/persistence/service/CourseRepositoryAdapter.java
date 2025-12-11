@@ -5,12 +5,14 @@ import com.arca.spring_data.domain.port.CourseRepository;
 import com.arca.spring_data.infrastructure.adapter.persistence.mapper.CourseMapper;
 import com.arca.spring_data.infrastructure.adapter.persistence.repository.CourseJpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class CourseRepositoryAdapter implements CourseRepository {
 
     private final CourseJpaRepository jpaRepository;
@@ -22,6 +24,7 @@ public class CourseRepositoryAdapter implements CourseRepository {
     }
 
     @Override
+    @Transactional
     public Course save(Course course) {
         return mapper.toDomain(jpaRepository.save(mapper.toEntity(course)));
     }
@@ -46,6 +49,7 @@ public class CourseRepositoryAdapter implements CourseRepository {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }

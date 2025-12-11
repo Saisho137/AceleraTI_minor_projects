@@ -6,12 +6,14 @@ import com.arca.spring_data.infrastructure.adapter.persistence.mapper.Enrollment
 import com.arca.spring_data.infrastructure.adapter.persistence.model.EnrollmentId;
 import com.arca.spring_data.infrastructure.adapter.persistence.repository.EnrollmentJpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 public class EnrollmentRepositoryAdapter implements EnrollmentRepository {
 
     private final EnrollmentJpaRepository jpaRepository;
@@ -23,6 +25,7 @@ public class EnrollmentRepositoryAdapter implements EnrollmentRepository {
     }
 
     @Override
+    @Transactional
     public Enrollment save(Enrollment enrollment) {
         return mapper.toDomain(jpaRepository.save(mapper.toEntity(enrollment)));
     }
@@ -48,6 +51,7 @@ public class EnrollmentRepositoryAdapter implements EnrollmentRepository {
     }
 
     @Override
+    @Transactional
     public void delete(Enrollment enrollment) {
         jpaRepository.delete(mapper.toEntity(enrollment));
     }
