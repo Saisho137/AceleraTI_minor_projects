@@ -89,4 +89,3 @@ public class Course {
         this.tasks.remove(task);
     }
 }
-

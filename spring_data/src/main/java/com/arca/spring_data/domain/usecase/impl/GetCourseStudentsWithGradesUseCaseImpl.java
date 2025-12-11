@@ -22,11 +22,9 @@ public class GetCourseStudentsWithGradesUseCaseImpl implements GetCourseStudents
 
     @Override
     public List<Enrollment> execute(Long courseId) {
-        // Validar que el curso existe
         courseRepository.findById(courseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Course", courseId));
 
-        // Obtener todas las matriculaciones del curso con estudiantes y notas
         return enrollmentRepository.findByCourseId(courseId);
     }
 }

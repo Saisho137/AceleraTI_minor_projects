@@ -26,16 +26,13 @@ public class GetTeacherCoursesUseCaseImpl implements GetTeacherCoursesUseCase {
 
     @Override
     public List<Course> execute(Long teacherId) {
-        // Validar que el docente existe
         User teacher = userRepository.findById(teacherId)
                 .orElseThrow(() -> new ResourceNotFoundException("Teacher", teacherId));
 
-        // Validar que el usuario es un docente
         if (teacher.getRole() != Role.TEACHER) {
             throw new BusinessRuleException(String.format(ErrorMessages.USER_NOT_TEACHER, teacherId));
         }
 
-        // Obtener cursos del docente
         return courseRepository.findByTeacherId(teacherId);
     }
 }

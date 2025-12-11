@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -40,14 +39,14 @@ public class EnrollmentRepositoryAdapter implements EnrollmentRepository {
     public List<Enrollment> findByStudentId(Long studentId) {
         return jpaRepository.findByStudentId(studentId).stream()
                 .map(mapper::toDomain)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<Enrollment> findByCourseId(Long courseId) {
         return jpaRepository.findByCourseId(courseId).stream()
                 .map(mapper::toDomain)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

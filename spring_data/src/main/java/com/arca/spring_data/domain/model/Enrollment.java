@@ -48,4 +48,3 @@ public class Enrollment {
         this.grade = grade;
     }
 }
-

@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/courses")
@@ -24,17 +23,13 @@ public class CourseController {
         this.mapper = mapper;
     }
 
-    /**
-     * Obtener cursos de un docente
-     * GET /api/courses/teacher/{teacherId}
-     */
     @GetMapping("/teacher/{teacherId}")
     public ResponseEntity<List<CourseResponse>> getTeacherCourses(@PathVariable Long teacherId) {
         List<Course> courses = getTeacherCoursesUseCase.execute(teacherId);
 
         List<CourseResponse> response = courses.stream()
                 .map(mapper::toResponse)
-                .collect(Collectors.toList());
+                .toList();
 
         return ResponseEntity.ok(response);
     }

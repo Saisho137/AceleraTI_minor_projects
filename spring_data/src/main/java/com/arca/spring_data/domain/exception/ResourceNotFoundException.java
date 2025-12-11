@@ -1,6 +1,11 @@
 package com.arca.spring_data.domain.exception;
 
+import java.io.Serial;
+
 public class ResourceNotFoundException extends RuntimeException {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     public ResourceNotFoundException(String message) {
         super(message);
     }
@@ -13,4 +18,3 @@ public class ResourceNotFoundException extends RuntimeException {
         super(String.format("%s not found with %s: %s", resourceName, fieldName, fieldValue));
     }
 }
-

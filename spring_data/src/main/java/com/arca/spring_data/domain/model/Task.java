@@ -60,4 +60,3 @@ public class Task {
         this.course = course;
     }
 }
-

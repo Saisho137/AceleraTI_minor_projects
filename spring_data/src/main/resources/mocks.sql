@@ -125,3 +125,12 @@ SELECT 'Users' as tabla, COUNT(*) as total FROM ejercicio_jpa.users
 UNION ALL SELECT 'Courses', COUNT(*) FROM ejercicio_jpa.courses
 UNION ALL SELECT 'Enrollments', COUNT(*) FROM ejercicio_jpa.enrollments
 UNION ALL SELECT 'Tasks', COUNT(*) FROM ejercicio_jpa.tasks;
+
+--
+-- Resumen:
+-- * 3 Docentes: María García, Carlos Rodríguez, Ana Martínez
+-- * 7 Estudiantes: Juan, Laura, Pedro, Sofía, Diego, Valentina, Andrés
+-- * 6 Cursos: Matemáticas, Física, Java, BD, Literatura, Historia
+-- * 24 Matriculaciones con notas entre 3.5 y 5.0
+-- * 14 Tareas/Anuncios distribuidas en los cursos
+--

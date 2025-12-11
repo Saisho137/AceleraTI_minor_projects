@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -38,14 +37,14 @@ public class TaskRepositoryAdapter implements TaskRepository {
     public List<Task> findByCourseId(Long courseId) {
         return jpaRepository.findByCourseId(courseId).stream()
                 .map(mapper::toDomain)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
     public List<Task> findByCourseIdOrderByPublishedDateDesc(Long courseId) {
         return jpaRepository.findByCourseIdOrderByPublishedAtDesc(courseId).stream()
                 .map(mapper::toDomain)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

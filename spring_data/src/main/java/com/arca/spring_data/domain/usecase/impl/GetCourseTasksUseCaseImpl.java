@@ -22,11 +22,9 @@ public class GetCourseTasksUseCaseImpl implements GetCourseTasksUseCase {
 
     @Override
     public List<Task> execute(Long courseId) {
-        // Validar que el curso existe
         courseRepository.findById(courseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Course", courseId));
 
-        // Obtener tareas ordenadas por fecha de publicación descendente
         return taskRepository.findByCourseIdOrderByPublishedDateDesc(courseId);
     }
 }
